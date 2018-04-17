@@ -1,21 +1,8 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
 import App from './App.vue'
-import axios from 'axios'
 import './api'
 
 // 按需引用element
-import { Loading, Button, Message, MessageBox, Notification, Popover, Tag, Input } from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-import sidebar from './components/sidebar.vue'
-import article from './components/article.vue'
-import about from './components/about.vue'
-import articleDetail from './components/articleDetail.vue'
-
-Vue.use(VueRouter)
-Vue.use(VueResource)
-
+import { Loading } from 'element-ui'
 
 //---------------------------------------------配置axios开始-----------------------------------------
 // 超时时间，单位为毫秒
@@ -55,23 +42,13 @@ axios.interceptors.response.use(response => { // 响应成功关闭loading
         })
         return Promise.reject(error)
     })
-    //---------------------------------------------配置axios结束-----------------------------------------
+    // ---------------------------------------------配置axios结束-----------------------------------------
 Vue.prototype.$axios = axios
 
-
-const components = [Button, Message, MessageBox, Notification, Popover, Tag, Input]
-
-components.forEach((item) => {
-    Vue.component(item.name, item)
-})
-
-const MsgBox = MessageBox
-Vue.prototype.$msgbox = MsgBox
-Vue.prototype.$alert = MsgBox.alert
-Vue.prototype.$confirm = MsgBox.confirm
-Vue.prototype.$prompt = MsgBox.prompt
-Vue.prototype.$message = Message
-Vue.prototype.$notify = Notification
+const article = r => require.ensure([], () => r(require('./components/article')), 'group-home')
+const sidebar = r => require.ensure([], () => r(require('./components/sidebar')), 'group-home')
+const about = r => require.ensure([], () => r(require('./components/about')), 'group-home')
+const articleDetail = r => require.ensure([], () => r(require('./components/articleDetail')), 'group-home')
 
 const router = new VueRouter({
     routes: [
