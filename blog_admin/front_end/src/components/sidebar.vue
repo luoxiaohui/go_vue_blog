@@ -16,11 +16,11 @@
             <span>关于</span>
           </li>
         </router-link>
-        <router-link to="/admin/signin">
+        <!-- <router-link to="/admin/signin">
           <li class="nav">
             <span>登录</span>
           </li>
-        </router-link>
+        </router-link> -->
         <router-link to="/admin/articleList">
           <li class="nav">
             <span>管理</span>
