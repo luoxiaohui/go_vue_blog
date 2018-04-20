@@ -41,16 +41,16 @@ axios.interceptors.request.use(config => {
     // http响应拦截器
 axios.interceptors.response.use(response => { // 响应成功关闭loading
         loadinginstace.close()
-            // console.log(response.data)
         var code = JSON.parse(response.data)["code"]
             // 登录失效
-            // if (code == "001") {
+        if (code == "001") {
 
-        //     this.$router.push({ path: '/admin/signin', component: signin })
-        // } else {
-        //     return response
-        // }
-        return response
+            router.push({ path: '/admin/signin', component: signin })
+        } else {
+
+            return response
+        }
+        // return response
     }, error => {
         loadinginstace.close()
         Message.error({
